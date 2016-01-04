@@ -32,7 +32,7 @@ Consent.request(new PermissionRequest(this, READ_CONTACTS, ACCESS_FINE_LOCATION)
 });
 ```
 
-Due to how Android processes permissions you also need to add the following code (which can be placed in a base activity if it suits your pattern
+Due to how Android processes permissions you also need to add the following code (which can be placed in a base activity or fragment if it suits you)
 
 ```java
 @Override
