@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Permissions test</string>
+
+    <string name="request_one">Request One</string>
+    <string name="request_multiple">Request Multiple</string>
+
+    <string name="explanation_title_single">Single Explanation Title</string>
+    <string name="explanation_message_single">Explanation message for contacts goes here</string>
+
+    <string name="explanation_title_multiple">Multiple Explanation Title</string>
+    <string name="explanation_message_multiple">Explanation message for all the permissions goes here</string>
+
+</resources>

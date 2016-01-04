@@ -1,0 +1,5 @@
+<resources>
+    <string name="default_explanation_title">Permission Required</string>
+    <string name="default_explanation_message">We need to access some of your phone\'s features to complete this action</string>
+    <string name="default_explanation_confirm">OK</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="padding">10dp</dimen>
+</resources>

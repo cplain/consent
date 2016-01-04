@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.seaplain.android.consent"/>
+<manifest
+    package="com.seaplain.android.consent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Even when using runtime permissions on an api 23+ device, if you do not have these
+    declared "Package Installer" will crash and bring the app down with it, odd as you don't
+    get a stacktrace, but important to note, even though we would need them here for pre-marshmallow
+    anyway for now -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

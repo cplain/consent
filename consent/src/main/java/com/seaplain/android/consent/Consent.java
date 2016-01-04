@@ -6,15 +6,33 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
 
+import com.seaplain.android.consent.PermissionRequest.ExplanationListener;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Utility class that manages permission requests
+ * Library class that manages permission requests
  */
-public class PermissionManager {
+public class Consent {
 
     private static final AtomicInteger NEXT_ID = new AtomicInteger();
+    private static Consent mInstance;
     private SparseArray<PermissionRequest> mPendingRequests = new SparseArray<>();
+
+    /**
+     * @return The current instance of {@link Consent}
+     */
+    public static Consent getInstance() {
+        if (mInstance == null) {
+            mInstance = new Consent();
+        }
+        return mInstance;
+    }
+
+    /**
+     * Private constructor to prevent outside initialisation
+     */
+    private Consent() {}
 
     /**
      * Perform an action that needs a permission to complete
@@ -32,7 +50,7 @@ public class PermissionManager {
     }
 
     /**
-     * Inform the {@link PermissionManager} of the permission result so that it may trigger the appropriate callbacks
+     * Inform the {@link Consent} of the permission result so that it may trigger the appropriate callbacks
      */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionRequest request = mPendingRequests.get(requestCode);
@@ -63,7 +81,7 @@ public class PermissionManager {
     private void showExplanation(@NonNull final PermissionRequest request) {
         // We do it this way so that if a user of the manager wants, they can return
         // null with onExplanationRequested, display their own way and then call onExplanationCompleted themselves
-        request.setExplanationListener(new PermissionRequest.ExplanationListener() {
+        request.setExplanationListener(new ExplanationListener() {
             @Override
             public void onExplanationCompleted() {
                 executeRequest(request);
@@ -72,9 +90,9 @@ public class PermissionManager {
 
         // Build default dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(request.getContext())
-                .setTitle("Permission Required")
-                .setMessage("We need to be able to access a part of your phone for this feature to function correctly")
-                .setPositiveButton("OK", null)
+                .setTitle(R.string.default_explanation_title)
+                .setMessage(R.string.default_explanation_message)
+                .setPositiveButton(R.string.default_explanation_confirm, null)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
@@ -82,7 +100,7 @@ public class PermissionManager {
                     }
                 }); // This will catch every way the dialog can be closed instead of just the button
 
-        // Provide to request to customisez
+        // Provide to request to customise
         builder = request.onExplanationRequested(builder);
 
         // If they return null, then they are handling it and request.onExplanationCompleted() will be triggered by them
