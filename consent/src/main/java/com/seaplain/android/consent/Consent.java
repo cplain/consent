@@ -22,7 +22,7 @@ public class Consent {
     /**
      * @return The current instance of {@link Consent}
      */
-    public static Consent getInstance() {
+    private static Consent getInstance() {
         if (mInstance == null) {
             mInstance = new Consent();
         }
@@ -35,9 +35,20 @@ public class Consent {
     private Consent() {}
 
     /**
+     * Inform {@link Consent} of the permission result so that it may trigger the appropriate callbacks
+     */
+    public static void handle(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        getInstance().onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    /**
      * Perform an action that needs a permission to complete
      */
-    public void requestPermissions(PermissionRequest request) {
+    public static void request(PermissionRequest request) {
+        getInstance().requestPermissions(request);
+    }
+
+    private void requestPermissions(PermissionRequest request) {
         if (request.hasUnprovidedPermissions()) {
             if (request.hasPermissionsThatNeedExplanation()) {
                 showExplanation(request);
@@ -49,10 +60,7 @@ public class Consent {
         }
     }
 
-    /**
-     * Inform the {@link Consent} of the permission result so that it may trigger the appropriate callbacks
-     */
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    private void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionRequest request = mPendingRequests.get(requestCode);
         if (request != null) {
             mPendingRequests.remove(requestCode);

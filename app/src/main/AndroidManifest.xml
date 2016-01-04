@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="com.seaplain.android.consent"
+    package="com.seaplain.android.example"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Even when using runtime permissions on an api 23+ device, if you do not have these
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.seaplain.android.example.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

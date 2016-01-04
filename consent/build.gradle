@@ -8,7 +8,7 @@ android {
         minSdkVersion 7
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -22,7 +22,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'consent'
 
-    publishedGroupId = 'com.seaplain.android.consent'
+    publishedGroupId = 'com.seaplain'
     libraryName = 'Consent'
     artifact = 'consent'
 
@@ -31,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/cplain/consent'
     gitUrl = 'https://github.com/cplain/consent.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'seaplain'
     developerName = 'Coby Plain'

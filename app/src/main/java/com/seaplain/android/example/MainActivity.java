@@ -1,10 +1,14 @@
-package com.seaplain.android.consent;
+package com.seaplain.android.example;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.seaplain.android.consent.Consent;
+import com.seaplain.android.consent.DeclinedPermissions;
+import com.seaplain.android.consent.PermissionRequest;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,12 +22,12 @@ import static android.widget.Toast.LENGTH_SHORT;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private PermissionManager mPermissionManager = new PermissionManager(); // Would be injected via dagger in a real project
-
-    // Could be in a base activity in a real project
+    /**
+     * This could be in a base activity in a real project
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        mPermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Consent.handle(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.request_one_btn)
     public void onRequestOneClicked() {
-        mPermissionManager.requestPermissions(new PermissionRequest(this, READ_CONTACTS) {
+        Consent.request(new PermissionRequest(this, READ_CONTACTS) {
             @Override
             protected void onPermissionsGranted() {
                 performDesiredAction();
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.request_multiple_btn)
     public void onRequestMultipleClicked() {
-        mPermissionManager.requestPermissions(new PermissionRequest(this, READ_CONTACTS, ACCESS_FINE_LOCATION) {
+        Consent.request(new PermissionRequest(this, READ_CONTACTS, ACCESS_FINE_LOCATION) {
             @Override
             protected void onPermissionsGranted() {
                 performDesiredAction();
