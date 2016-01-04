@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Permissions test</string>
+    <string name="app_name">Consent Demo</string>
 
     <string name="request_one">Request One</string>
     <string name="request_multiple">Request Multiple</string>
