@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void performDesiredAction() {
-        Toast.makeText(this, R.string.success, LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.granted, LENGTH_SHORT).show();
     }
 
     protected void performPermissionDeniedAction(boolean neverAskAgainChecked) {
-        Toast.makeText(this, neverAskAgainChecked ? R.string.failure_never_ask_again : R.string.failure, LENGTH_SHORT).show();
+        Toast.makeText(this, neverAskAgainChecked ? R.string.denied_never_ask_again : R.string.denied, LENGTH_SHORT).show();
     }
 }
