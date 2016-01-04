@@ -78,14 +78,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void performDesiredAction() {
-        Toast.makeText(this, "The action has been successfully performed", LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.success, LENGTH_SHORT).show();
     }
 
     protected void performPermissionDeniedAction(boolean neverAskAgainChecked) {
-        String message = neverAskAgainChecked ?
-                "You selected never ask again, go to settings if you want to change the permission" :
-                "The action has been prevented because no permission was provided";
-
-        Toast.makeText(this, message, LENGTH_SHORT).show();
+        Toast.makeText(this, neverAskAgainChecked ? R.string.failure_never_ask_again : R.string.failure, LENGTH_SHORT).show();
     }
 }

@@ -10,4 +10,8 @@
     <string name="explanation_title_multiple">Multiple Explanation Title</string>
     <string name="explanation_message_multiple">Explanation message for all the permissions goes here</string>
 
+    <string name="success">The action has been successfully performed</string>
+    <string name="failure">The action has been prevented because no permission was provided</string>
+    <string name="failure_never_ask_again">You selected never ask again, go to settings if you want to change the permission</string>
+
 </resources>
