@@ -20,12 +20,11 @@ Consent.request(new PermissionRequest(this, READ_CONTACTS, ACCESS_FINE_LOCATION)
         // perform rejected action
         // Note: DeclinedPermissions contains all the permissions rejected in this request as well as various
         // helpers, such as ones to extract permissions rejected because the user selected "Never Ask Again"
-        // so you can show an informed message
     }
 
     @Override
     protected AlertDialog.Builder onExplanationRequested(@NonNull AlertDialog.Builder builder, @NonNull String[] permissionsToExplain) {
-        // return the builder (you can customise) if you want to show a dialog or null if you want to handle the explanation yourself
+        // return the builder if you want to show a dialog or null if you want to handle the explanation yourself
         // if you are handling the explanation yourself be sure to call onExplanationCompleted() when you want the request to continue
         return builder.setTitle(R.string.explanation_title_multiple).setMessage(R.string.explanation_message_multiple);
     }
