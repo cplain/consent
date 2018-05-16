@@ -64,6 +64,12 @@ public class Consent {
         PermissionRequest request = mPendingRequests.get(requestCode);
         if (request != null) {
             mPendingRequests.remove(requestCode);
+
+            if (permissions.length == 0 && grantResults.length == 0) {
+                // According to Activity#onRequestPermissionsResult, this means permissions request was cancelled.
+                return;
+            }
+
             DeclinedPermissions declinedPermissions = DeclinedPermissions.from(permissions, grantResults, request);
 
             if (declinedPermissions.isEmpty()) {
