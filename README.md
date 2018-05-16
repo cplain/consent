@@ -44,7 +44,7 @@ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permis
 Download via jcenter
 ----------------------------------
 ```groovy
-compile 'com.seaplain:consent:1.0.1'
+compile 'com.seaplain:consent:1.0.2'
 ```
 
 License

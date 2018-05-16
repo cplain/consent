@@ -8,7 +8,7 @@ android {
         minSdkVersion 7
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -31,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/cplain/consent'
     gitUrl = 'https://github.com/cplain/consent.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     developerId = 'seaplain'
     developerName = 'Coby Plain'
