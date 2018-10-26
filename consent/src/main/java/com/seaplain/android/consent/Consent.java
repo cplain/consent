@@ -2,7 +2,6 @@ package com.seaplain.android.consent;
 
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
 
@@ -86,7 +85,7 @@ public class Consent {
     private void executeRequest(PermissionRequest request) {
         int id = NEXT_ID.incrementAndGet();
         mPendingRequests.append(id, request);
-        ActivityCompat.requestPermissions(request.getContext(), request.getUnprovidedPermissions(), id);
+        HostWrapper.requestPermissions(request.getHostWrapper(), request.getUnprovidedPermissions(), id);
     }
 
     /**

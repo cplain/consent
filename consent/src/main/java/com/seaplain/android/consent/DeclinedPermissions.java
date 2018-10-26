@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale;
+import static com.seaplain.android.consent.HostWrapper.shouldShowRequestPermissionRationale;
 
 /**
  * Encapsulates a list of declined permissions from the user, with some helper functions for easier usage
@@ -20,7 +20,7 @@ public class DeclinedPermissions {
         for (int i = 0; i < permissions.length; i++) {
             if (grantResults[i] != PERMISSION_GRANTED) {
                 // If it was declined but we are told not to show an explanation, they must have selected the "never show again" option
-                declinedPermissions.add(new DeclinedPermission(permissions[i], !shouldShowRequestPermissionRationale(request.getContext(), permissions[i])));
+                declinedPermissions.add(new DeclinedPermission(permissions[i], !shouldShowRequestPermissionRationale(request.getHostWrapper(), permissions[i])));
             }
         }
         return new DeclinedPermissions(declinedPermissions);

@@ -1,15 +1,17 @@
 package com.seaplain.android.consent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale;
 import static android.support.v4.content.ContextCompat.checkSelfPermission;
+import static com.seaplain.android.consent.HostWrapper.shouldShowRequestPermissionRationale;
 
 /**
  * Encapsulates a request for permissions, contains all relevant information
@@ -20,14 +22,19 @@ public abstract class PermissionRequest {
         void onExplanationCompleted();
     }
 
-    private Activity mContext;
+    private HostWrapper mHostWrapper;
     private String[] mRequestedPermissions;
     private String[] mPermissionsThatNeedExplanation; // Cached for performance reasons
     private String[] mUnprovidedPermissions; // Cached for performance reasons
     private ExplanationListener mExplanationListener;
 
-    public PermissionRequest(@NonNull Activity context, @NonNull String... permissions) {
-        mContext = context;
+    public PermissionRequest(@NonNull Activity activity, @NonNull String... permissions) {
+        mHostWrapper = new HostWrapper(activity);
+        mRequestedPermissions = permissions;
+    }
+
+    public PermissionRequest(@NonNull Fragment fragment, @NonNull String... permissions) {
+        mHostWrapper = new HostWrapper(fragment);
         mRequestedPermissions = permissions;
     }
 
@@ -40,8 +47,12 @@ public abstract class PermissionRequest {
 
     protected abstract void onPermissionsDeclined(@NonNull DeclinedPermissions declinedPermissions);
 
-    public Activity getContext() {
-        return mContext;
+    public Context getContext() {
+        return mHostWrapper.getContext();
+    }
+
+    public HostWrapper getHostWrapper() {
+        return mHostWrapper;
     }
 
     public String[] getRequestedPermissions() {
@@ -79,7 +90,7 @@ public abstract class PermissionRequest {
         if (mPermissionsThatNeedExplanation == null) {
             List<String> permsToExplain = new ArrayList<>();
             for (String permission : getRequestedPermissions()) {
-                if (shouldShowRequestPermissionRationale(getContext(), permission)) {
+                if (shouldShowRequestPermissionRationale(mHostWrapper, permission)) {
                     permsToExplain.add(permission);
                 }
             }
